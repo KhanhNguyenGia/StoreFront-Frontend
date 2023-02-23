@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+.p-divider .p-divider-content {
+	background: transparent;
+}
+
+.p-divider.p-divider-horizontal:before {
+	border-top-style: solid;
+	border-top-color: #0005;
+}
+
+.p-checkbox,
+.p-checkbox .p-checkbox-box {
+	width: 20px;
+	height: 20px;
+}
+
+.p-galleria .p-galleria-thumbnail-container {
+	background: transparent;
+	padding: 0;
+	padding-top: 1rem;
+}
+
+.p-galleria-thumbnail-item {
+	opacity: 1;
+}
+
+#__next {
+	height: 100vh;
+}
