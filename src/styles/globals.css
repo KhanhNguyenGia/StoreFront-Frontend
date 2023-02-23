@@ -44,6 +44,17 @@ a {
 	opacity: 1;
 }
 
-#__next {
+/* #__next {
 	height: 100vh;
+} */
+
+img {
+	object-fit: cover;
+	object-position: center;
+}
+
+.p-menubar {
+	border: none;
+	border-radius: 0;
+	background: white;
 }

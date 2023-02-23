@@ -32,7 +32,7 @@ const ProductViewContainer: FC<ProductViewContainerProps> = ({
 							<img
 								src={item}
 								alt='product'
-								className='w-full max-h-[600px] lg:max-h-[500px] object-cover object-center rounded-lg'
+								className='w-full max-h-[500px] object-cover object-center rounded-lg overflow-hidden'
 							/>
 						</div>
 					)}
@@ -61,7 +61,7 @@ const ProductViewContainer: FC<ProductViewContainerProps> = ({
 							<img
 								alt=''
 								src={item}
-								className='object-cover object-center rounded-lg h-32 lg:h-28 w-36 lg:w-28'
+								className='object-cover object-center rounded-lg h-32 lg:h-28 w-24 sm:w-36 lg:w-28'
 							/>
 						</div>
 					)}

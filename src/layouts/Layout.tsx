@@ -5,7 +5,7 @@ export type LayoutProps = {
 };
 
 const Layout: FC<LayoutProps> = ({ children }) => {
-	return <div className='flex flex-col max-w-7xl px-4 m-auto'>{children}</div>;
+	return <div className='flex flex-col max-w-7xl px-5 m-auto'>{children}</div>;
 };
 
 export default Layout;
