@@ -1,18 +1,18 @@
 import Navbar from '@/components/Navbar/Navbar.component';
 import { Layout } from '@/layouts';
+import { NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Button } from 'primereact/button';
 
-const Error404Page = () => {
-	const { data: session } = useSession();
+const Error404Page: NextPage = () => {
 	return (
 		<>
 			<Head>
 				<title>404 - Page not found</title>
 			</Head>
-			<Navbar userSignedIn={!!session} />
+			<Navbar />
 			<Layout>
 				<div className='flex flex-col items-center justify-center h-[calc(100vh_-_64px)] gap-5'>
 					<h1 className='text-6xl font-bold'>404</h1>

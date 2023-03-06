@@ -10,7 +10,7 @@ export type ProductListProps = {
 const ProductList: FC<ProductListProps> = ({ products, title }) => {
 	return (
 		<div className='flex flex-wrap py-8'>
-			{title && <h2 className='w-full px-5 py-2 text-4xl font-bold'>{title}</h2>}
+			{title && <h2 className='w-full px-5 py-2 text-3xl font-bold'>{title}</h2>}
 			{products.map((product) => {
 				return <ProductCard product={product} key={product.id} />;
 			})}

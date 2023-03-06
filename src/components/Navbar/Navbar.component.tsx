@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import React, { FC, useRef } from 'react';
 import { Menubar } from 'primereact/menubar';
-import { Button } from 'primereact/button';
-import { signIn, signOut } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import { PrimeIcons } from 'primereact/api';
 import { Menu } from 'primereact/menu';
 import { MenuItem } from 'primereact/menuitem';
+import { OverlayPanel } from 'primereact/overlaypanel';
+import { Badge } from 'primereact/badge';
+import CartPopUpContainer from '@/containers/CartPopupContainer/CartPopupContainer';
 
-export type NavbarProps = {
-	userSignedIn: boolean;
-};
+export type NavbarProps = {};
 
 const profileItems: MenuItem[] = [
 	{
@@ -55,13 +55,16 @@ const navItems: MenuItem[] = [
 	},
 ];
 
-const Navbar: FC<NavbarProps> = ({ userSignedIn }) => {
+const Navbar: FC<NavbarProps> = () => {
 	const menuRef = useRef<Menu | null>(null);
+	const cartRef = useRef<OverlayPanel | null>(null);
+	const { data: session } = useSession();
+
 	return (
-		<div className='nav-wrapper w-screen'>
+		<div className='nav-wrapper w-full absolute top-0'>
 			<Menubar
 				model={navItems}
-				className='max-w-7xl m-auto px-5 py-0 h-16'
+				className='max-w-7xl m-auto px-10 py-0 h-16'
 				start={
 					<div className='logo-wrapper mr-3 py-2 h-16'>
 						<Link href='/' className='font-bold text-4xl '>
@@ -71,25 +74,40 @@ const Navbar: FC<NavbarProps> = ({ userSignedIn }) => {
 				}
 				end={
 					<div className='flex items-center'>
-						{userSignedIn ? (
-							<>
-								<div className='profile-wrapper flex items-center justify-center w-16 h-16 border-b-2 border-0 border-solid hover:border-b-[var(--primary-color)] border-transparent transition-colors cursor-pointer'>
-									<i
-										className={`${PrimeIcons.SHOPPING_CART} text-lg font-semibold text-[var(--primary-color)] hover:text-[var(--primary-600)]`}
-									/>
-								</div>
-								<div
-									className='profile-wrapper flex items-center justify-center w-16 h-16 border-b-2 border-0 border-solid hover:border-b-[var(--primary-color)] border-transparent transition-colors cursor-pointer'
-									onClick={(e) => menuRef.current?.toggle(e)}
-								>
-									<i
-										className={`${PrimeIcons.USER} text-lg font-semibold text-[var(--primary-color)] hover:text-[var(--primary-600)]`}
-									/>
-									<Menu model={profileItems} popup ref={menuRef} />
-								</div>
-							</>
+						<div
+							className='profile-wrapper flex items-center justify-center w-16 h-16 border-b-2 border-0 border-solid hover:border-b-[var(--primary-color)] border-transparent transition-colors cursor-pointer'
+							onClick={(e) => cartRef.current?.toggle(e)}
+						>
+							<i
+								className={`${PrimeIcons.SHOPPING_CART} text-xl font-semibold text-[var(--primary-color)] hover:text-[var(--primary-600)] relative`}
+							>
+								<Badge
+									severity='danger'
+									className='absolute -top-[2px] text-xs h-4 leading-5 -right-4'
+									value={0}
+								/>
+							</i>
+						</div>
+						<OverlayPanel ref={cartRef}>
+							<CartPopUpContainer />
+						</OverlayPanel>
+						{session ? (
+							<div
+								className='profile-wrapper flex items-center justify-center w- h-16 border-b-2 border-0 border-solid hover:border-b-[var(--primary-color)] border-transparent transition-colors cursor-pointer'
+								onClick={(e) => menuRef.current?.toggle(e)}
+							>
+								<i
+									className={`${PrimeIcons.USER} text-xl font-semibold text-[var(--primary-color)] hover:text-[var(--primary-600)]`}
+								/>
+								<Menu model={profileItems} popup ref={menuRef} />
+							</div>
 						) : (
-							<Button onClick={() => signIn()}>Sign in</Button>
+							<div
+								className='profile-wrapper flex items-center justify-center h-16 border-b-2 border-0 border-solid hover:border-b-[var(--primary-color)] border-transparent transition-colors cursor-pointer text-lg font-semibold text-[var(--primary-color)] hover:text-[var(--primary-600)] px-3'
+								onClick={() => signIn()}
+							>
+								Sign in
+							</div>
 						)}
 					</div>
 				}

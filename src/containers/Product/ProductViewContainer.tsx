@@ -22,7 +22,7 @@ const ProductViewContainer: FC<ProductViewContainerProps> = ({
 	};
 	return (
 		<div className='flex lg:flex-row flex-col'>
-			<div className='flex-[5] px-3 md:px-8 lg:pl-5 lg:pr-0'>
+			<div className='flex-[5] px-3'>
 				<Galleria
 					value={imageUrl}
 					showThumbnails={true}
@@ -73,10 +73,7 @@ const ProductViewContainer: FC<ProductViewContainerProps> = ({
 					// )}
 				/>
 			</div>
-			<form
-				onSubmit={onSubmit}
-				className='flex-[3] flex flex-col py-8 lg:py-0 px-5 md:px-10 lg:px-5'
-			>
+			<form onSubmit={onSubmit} className='flex-[3] flex flex-col py-8 lg:py-0 px-5'>
 				<h2 className='text-2xl font-bold'>{name}</h2>
 				<div className='mt-2 flex items-center gap-1 text-yellow-400'>
 					{[...Array(5)].map((_, i) =>
@@ -149,7 +146,12 @@ const ProductViewContainer: FC<ProductViewContainerProps> = ({
 						+
 					</Button>
 				</div>
-				<Button className='w-full justify-center mt-8'>Give money</Button>
+				<div className='flex w-full mt-8 gap-4'>
+					<Button outlined className='justify-center'>
+						<i className={`${PrimeIcons.SHOPPING_CART}`} />
+					</Button>
+					<Button className='justify-center'>Give money</Button>
+				</div>
 			</form>
 		</div>
 	);

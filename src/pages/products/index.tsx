@@ -1,15 +1,25 @@
 import React from 'react';
 import { Layout } from '@/layouts';
-import { InferGetServerSidePropsType } from 'next';
+import { InferGetServerSidePropsType, NextPage } from 'next';
 import { Product } from '@/constants/type';
 import { ProductList } from '@/components/Products';
+import Head from 'next/head';
+import Navbar from '@/components/Navbar/Navbar.component';
 
-const ProductsPage = ({ products }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const ProductsPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
+	products,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	return (
-		<Layout>
-			<ProductList title={'Popular'} products={products} />
-			<ProductList title={'Not popular'} products={products} />
-		</Layout>
+		<>
+			<Head>
+				<title>Products</title>
+			</Head>
+			<Navbar />
+			<Layout>
+				<ProductList title={'Popular'} products={products} />
+				<ProductList title={'Not popular'} products={products} />
+			</Layout>
+		</>
 	);
 };
 
